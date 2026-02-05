@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    padding: 16px;
+  }
+
+  .card {
+    background: #fff;
+    width: 100%;
+    max-width: 360px;
+    padding: 32px 22px;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    animation: popIn 0.8s ease;
+    position: relative;
+    z-index: 2;
+  }
+
+  h1 {
+    color: #ff4d6d;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 26px;
+  }
+
+  p {
+    color: #555;
+    font-size: 14px;
+    margin: 6px 0;
+  }
+
+  .question {
+    margin-top: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ff4d6d;
+  }
+
+  .buttons {
+    margin-top: 26px;
+    position: relative;
+    height: 140px;
+  }
+
+  button {
+    font-size: 16px;
+    padding: 14px 28px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    touch-action: manipulation;
+  }
+
+  button:active {
+    transform: scale(0.95);
+  }
+
+  #yes {
+    background: #ff4d6d;
+    color: #fff;
+  }
+
+  #no {
+    background: #ffe4ec;
+    color: #ff4d6d;
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .love-message {
+    display: none;
+    margin-top: 20px;
+    animation: fadeIn 0.8s ease forwards;
+  }
+
+  .love-message h2 {
+    color: #ff4d6d;
+    margin-bottom: 4px;
+    font-size: 22px;
+  }
+
+  .heart {
+    position: absolute;
+    bottom: -40px;
+    font-size: 20px;
+    pointer-events: none;
+    animation: floatUp linear forwards;
+    opacity: 0.8;
+  }
+
+  @keyframes floatUp {
+    from {
+      transform: translateY(0) scale(1);
+      opacity: 0.9;
+    }
+    to {
+      transform: translateY(-120vh) scale(1.6);
+      opacity: 0;
+    }
+  }
+
+  @keyframes popIn {
+    from {
+      transform: scale(0.88);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Hi Baby 💗</h1>
+  <p>You make everything feel lighter.</p>
+  <div class="question">Will you be my Valentine?</div>
+
+  <div class="buttons" id="buttons">
+    <button id="yes">Yes 💖</button>
+    <button id="no">No 🙄</button>
+  </div>
+
+  <div class="love-message" id="message">
+    <h2>YAY 😭💘</h2>
+    <p>I knew it.</p>
+    <p>I love you always.</p>
+    <p><strong>— James</strong></p>
+  </div>
+</div>
+
+<script>
+  const yesBtn = document.getElementById("yes");
+  const noBtn = document.getElementById("no");
+  const buttonsBox = document.getElementById("buttons");
+  const message = document.getElementById("message");
+
+  yesBtn.addEventListener("click", () => {
+    buttonsBox.style.display = "none";
+    message.style.display = "block";
+  });
+
+  function moveNo() {
+    const maxX = buttonsBox.clientWidth - noBtn.offsetWidth;
+    const maxY = buttonsBox.clientHeight - noBtn.offsetHeight;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+    noBtn.style.transform = "none";
+  }
+
+  noBtn.addEventListener("mouseenter", moveNo);
+  noBtn.addEventListener("touchstart", moveNo);
+
+  // Floating hearts (mobile-safe rate)
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.textContent = Math.random() > 0.5 ? "💗" : "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+    heart.style.fontSize = (Math.random() * 12 + 16) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 7000);
+  }, 450);
+</script>
+
+</body>
+</html>
